@@ -45,9 +45,9 @@ Implementar, de forma incremental e guiada por testes, um sistema simples de **c
 ## 🧪 Filosofia TDD aplicada
 Este projeto segue o ciclo TDD:
 
-### 1. Red – Escreva um teste que falha
-### 2. Green – Implemente o código mínimo necessário para passar o teste
-### 3. Refactor – Refatore o código mantendo todos os testes passando
+#### 1. Red – Escreva um teste que falha
+#### 2. Green – Implemente o código mínimo necessário para passar o teste
+#### 3. Refactor – Refatore o código mantendo todos os testes passando
 
 ---
 
