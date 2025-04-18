@@ -30,7 +30,7 @@ Implementar, de forma incremental e guiada por testes, um sistema simples de **c
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/DaniloTakeo/carrinho-tdd.git
+   git clone git@github.com:DaniloTakeo/tdd_java.git
    cd carrinho-tdd
    ```
    
