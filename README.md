@@ -4,6 +4,18 @@ Este projeto foi desenvolvido com o objetivo de praticar e demonstrar a aplicaç
 
 ---
 
+## 🧪 O que é TDD?
+
+**TDD (Test-Driven Development)** é uma metodologia de desenvolvimento onde os testes são escritos **antes** da implementação do código. O ciclo de TDD é dividido em três etapas principais:
+
+1. **Red**: Escreva um teste que falha, pois a funcionalidade ainda não existe.
+2. **Green**: Implemente o código mínimo necessário para fazer o teste passar.
+3. **Refactor**: Refatore o código, mantendo todos os testes passando.
+
+Esse processo ajuda a garantir que o código seja mais confiável, modular e fácil de manter.
+
+---
+
 ## 📚 Objetivo
 
 Implementar, de forma incremental e guiada por testes, um sistema simples de **carrinho de compras**, simulando operações comuns de e-commerce como:
