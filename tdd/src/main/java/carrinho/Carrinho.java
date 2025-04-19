@@ -19,4 +19,8 @@ public class Carrinho {
                        .mapToDouble(Produto::getPreco)
                        .sum();
     }
+    
+    public void remover(Produto produto) {
+        produtos.remove(produto);
+    }
 }
