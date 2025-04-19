@@ -26,4 +26,19 @@ public class CarrinhoTest {
 
         assertThat(total).isEqualTo(170.0);
     }
+    
+    @Test
+    void deveRemoverProdutoDoCarrinho() {
+        Carrinho carrinho = new Carrinho();
+        Produto produto1 = new Produto("Camiseta", 59.90);
+        Produto produto2 = new Produto("Calça", 120.00);
+
+        carrinho.adicionar(produto1);
+        carrinho.adicionar(produto2);
+
+        carrinho.remover(produto1);
+
+        assertThat(carrinho.getProdutos()).doesNotContain(produto1);
+        assertThat(carrinho.getProdutos()).contains(produto2);
+    }
 }
