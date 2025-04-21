@@ -4,23 +4,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Carrinho {
-    private List<Produto> produtos = new ArrayList<>();
+    private List<ItemCarrinho> itens = new ArrayList<>();
 
     public void adicionar(Produto produto) {
-        produtos.add(produto);
+        ItemCarrinho itemExistente = buscarItem(produto);
+        if (itemExistente != null) {
+            itemExistente.incrementar();
+        } else {
+            itens.add(new ItemCarrinho(produto));
+        }
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
+    public int getQuantidade(Produto produto) {
+        ItemCarrinho item = buscarItem(produto);
+        return item != null ? item.getQuantidade() : 0;
+    }
+
+    public double getSubtotal(Produto produto) {
+        ItemCarrinho item = buscarItem(produto);
+        return item != null ? item.getSubtotal() : 0.0;
+    }
+
+    public List<ItemCarrinho> getItens() {
+        return itens;
+    }
+
+    private ItemCarrinho buscarItem(Produto produto) {
+        return itens.stream()
+                .filter(item -> item.getProduto().equals(produto))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public double getValorTotal() {
+        return itens.stream()
+                .mapToDouble(ItemCarrinho::getSubtotal)
+                .sum();
     }
     
-    public double getValorTotal() {
-        return produtos.stream()
-                       .mapToDouble(Produto::getPreco)
-                       .sum();
+    public List<Produto> getProdutos() {
+        return itens.stream()
+                .map(ItemCarrinho::getProduto)
+                .toList();
     }
     
     public void remover(Produto produto) {
-        produtos.remove(produto);
+        ItemCarrinho item = buscarItem(produto);
+        if (item == null) return;
+
+        if (item.getQuantidade() > 1) {
+            item.decrementar();
+        } else {
+            itens.remove(item);
+        }
     }
+    
+    
 }
