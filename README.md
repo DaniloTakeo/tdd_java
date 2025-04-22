@@ -23,8 +23,8 @@ Implementar, de forma incremental e guiada por testes, um sistema simples de **c
 - Adicionar produto
 - Calcular valor total
 - Remover produto
-- (Em breve) Aplicar desconto
-- (Em breve) Controlar quantidade
+- Aplicar desconto
+- Controlar quantidade
 
 ---
 
