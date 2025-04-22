@@ -65,4 +65,16 @@ public class CarrinhoTest {
         assertThat(carrinho.getQuantidade(produto)).isEqualTo(2);
         assertThat(carrinho.getSubtotal(produto)).isEqualTo(160.0);
     }
+    
+    @Test
+    void deveAplicarDescontoPercentualAoValorTotal() {
+        Carrinho carrinho = new Carrinho();
+        Produto produto = new Produto("Fone de ouvido", 100.0);
+        carrinho.adicionar(produto);
+        carrinho.adicionar(produto); // Total bruto = 200
+
+        carrinho.aplicarDescontoPercentual(10); // 10% de desconto
+
+        assertThat(carrinho.getValorFinal()).isEqualTo(180.0);
+    }
 }
