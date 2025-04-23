@@ -6,6 +6,7 @@ import java.util.List;
 public class Carrinho {
 	private List<ItemCarrinho> itens = new ArrayList<>();
 	private double descontoPercentual = 0.0;
+	private double descontoFixo = 0.0;
 
 	public void adicionar(Produto produto) {
 		ItemCarrinho itemExistente = buscarItem(produto);
@@ -55,12 +56,26 @@ public class Carrinho {
 	}
 
 	public void aplicarDescontoPercentual(double percentual) {
-		this.descontoPercentual = percentual;
+	    this.descontoPercentual = percentual;
+	    this.descontoFixo = 0.0;
+	}
+	
+	public void aplicarDescontoFixo(double valor) {
+	    this.descontoFixo = valor;
+	    this.descontoPercentual = 0.0;
 	}
 
+
 	public double getValorFinal() {
-		double total = getValorTotal();
-		return total - (total * descontoPercentual / 100.0);
+	    double total = getValorTotal();
+
+	    if (descontoPercentual > 0.0) {
+	        total -= total * descontoPercentual / 100.0;
+	    } else if (descontoFixo > 0.0) {
+	        total -= descontoFixo;
+	    }
+
+	    return Math.max(total, 0.0); // impede valor negativo
 	}
 
 }
