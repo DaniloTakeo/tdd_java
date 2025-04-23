@@ -77,4 +77,27 @@ public class CarrinhoTest {
 
         assertThat(carrinho.getValorFinal()).isEqualTo(180.0);
     }
+    
+    @Test
+    void deveAplicarDescontoFixoAoValorTotal() {
+        Carrinho carrinho = new Carrinho();
+        Produto produto = new Produto("Monitor", 500.0);
+        carrinho.adicionar(produto);
+        carrinho.adicionar(produto); // total = 1000
+
+        carrinho.aplicarDescontoFixo(150.0);
+
+        assertThat(carrinho.getValorFinal()).isEqualTo(850.0);
+    }
+    
+    @Test
+    void valorFinalNaoPodeSerNegativoComDescontoFixoMuitoAlto() {
+        Carrinho carrinho = new Carrinho();
+        Produto produto = new Produto("Teclado", 120.0);
+        carrinho.adicionar(produto); // total = 120
+
+        carrinho.aplicarDescontoFixo(200.0);
+
+        assertThat(carrinho.getValorFinal()).isEqualTo(0.0);
+    }
 }
