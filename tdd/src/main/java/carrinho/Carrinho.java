@@ -7,8 +7,18 @@ public class Carrinho {
 	private List<ItemCarrinho> itens = new ArrayList<>();
 	private double descontoPercentual = 0.0;
 	private double descontoFixo = 0.0;
+	private ServicoEstoque servicoEstoque;
+	
+	public Carrinho() {}
+	
+	public Carrinho(ServicoEstoque servicoEstoque) {
+        this.servicoEstoque = servicoEstoque;
+    }
 
 	public void adicionar(Produto produto) {
+		if (!servicoEstoque.verificarDisponibilidade(produto, 1)) {
+            throw new IllegalStateException("Produto sem estoque");
+        }
 		ItemCarrinho itemExistente = buscarItem(produto);
 		if (itemExistente != null) {
 			itemExistente.incrementar();
