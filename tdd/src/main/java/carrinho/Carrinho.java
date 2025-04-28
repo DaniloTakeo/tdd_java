@@ -17,8 +17,8 @@ public class Carrinho {
 
 	public void adicionar(Produto produto) {
 		if (!servicoEstoque.verificarDisponibilidade(produto, 1)) {
-            throw new IllegalStateException("Produto sem estoque");
-        }
+		    throw new EstoqueInsuficienteException("Produto sem estoque disponível");
+		}
 		ItemCarrinho itemExistente = buscarItem(produto);
 		if (itemExistente != null) {
 			itemExistente.incrementar();

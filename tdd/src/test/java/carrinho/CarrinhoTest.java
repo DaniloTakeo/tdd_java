@@ -2,6 +2,7 @@ package carrinho;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -59,8 +60,8 @@ class CarrinhoTest {
 
 	        // act + assert
 	        assertThatThrownBy(() -> carrinho.adicionar(produto))
-	            .isInstanceOf(IllegalStateException.class)
-	            .hasMessage("Produto sem estoque");
+	            .isInstanceOf(EstoqueInsuficienteException.class)
+	            .hasMessage("Produto sem estoque disponível");
 	    }
 	}
 	
@@ -109,6 +110,25 @@ class CarrinhoTest {
 
 	        assertThat(produtosChamados).containsExactly(camiseta, calca);
 	        assertThat(quantidadesChamadas).containsExactly(1, 1);
+	    }
+	}
+	
+	@Nested
+	class FluxoDeExcecoes {
+
+	    @Test
+	    void deveLancarEstoqueInsuficienteExceptionQuandoNaoHouverProdutoDisponivel() {
+	        // Arrange
+	        Produto produto = new Produto("Notebook", 3000.0);
+	        when(servicoEstoque.verificarDisponibilidade(produto, 1)).thenReturn(false);
+
+	        // Act + Assert
+	        EstoqueInsuficienteException exception = assertThrows(
+	            EstoqueInsuficienteException.class,
+	            () -> carrinho.adicionar(produto)
+	        );
+
+	        assertThat(exception.getMessage()).isEqualTo("Produto sem estoque disponível");
 	    }
 	}
 }
