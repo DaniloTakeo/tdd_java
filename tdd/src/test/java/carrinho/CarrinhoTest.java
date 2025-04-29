@@ -122,13 +122,10 @@ class CarrinhoTest {
 	        Produto produto = new Produto("Notebook", 3000.0);
 	        when(servicoEstoque.verificarDisponibilidade(produto, 1)).thenReturn(false);
 
-	        // Act + Assert
-	        EstoqueInsuficienteException exception = assertThrows(
-	            EstoqueInsuficienteException.class,
-	            () -> carrinho.adicionar(produto)
-	        );
-
-	        assertThat(exception.getMessage()).isEqualTo("Produto sem estoque disponível");
+	        // Act + Assert (AssertJ)
+	        assertThatThrownBy(() -> carrinho.adicionar(produto))
+	            .isInstanceOf(EstoqueInsuficienteException.class)
+	            .hasMessage("Produto sem estoque disponível");
 	    }
 	}
 }
